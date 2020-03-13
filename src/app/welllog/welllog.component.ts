@@ -6,8 +6,8 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener }
   styleUrls: ['./welllog.component.scss']
 })
 export class WelllogComponent implements AfterViewInit {
-  @ViewChild('wellog') canvas: ElementRef;
-  @ViewChild('parent') parent: ElementRef;
+  @ViewChild('wellog', { static: true }) canvas: ElementRef;
+  @ViewChild('parent', { static: true }) parent: ElementRef;
   private plot: geotoolkit.plot.Plot;
   private widget: geotoolkit.welllog.widgets.WellLogWidget;
   constructor() { }

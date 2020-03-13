@@ -8,7 +8,7 @@ import { WelllogComponent } from './welllog/welllog.component';
 })
 export class AppComponent implements AfterViewInit {
   title = 'hello-welllog';
-  @ViewChild(WelllogComponent) welllogComponent: WelllogComponent;
+  @ViewChild(WelllogComponent, { static: true }) welllogComponent: WelllogComponent;
   constructor() {
 
   }
