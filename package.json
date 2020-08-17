@@ -32,6 +32,8 @@
     "@types/node": "^12.11.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@int/impl": "~3.0.41",
+    "@int/geotoolkit": "~3.0.41",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

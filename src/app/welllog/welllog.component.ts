@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
-
+import { Plot } from '@int/geotoolkit/plot/Plot';
+import { WellLogWidget } from '@int/geotoolkit/welllog/widgets/WellLogWidget';
 @Component({
   selector: 'app-welllog',
   templateUrl: './welllog.component.html',
@@ -8,10 +9,10 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener }
 export class WelllogComponent implements AfterViewInit {
   @ViewChild('wellog', { static: true }) canvas: ElementRef;
   @ViewChild('parent', { static: true }) parent: ElementRef;
-  private plot: geotoolkit.plot.Plot;
-  private widget: geotoolkit.welllog.widgets.WellLogWidget;
+  private plot: Plot;
+  private widget: WellLogWidget;
   constructor() { }
-  getWidget(): geotoolkit.welllog.widgets.WellLogWidget {
+  getWidget(): WellLogWidget {
     return this.widget;
   }
   ngAfterViewInit() {
@@ -27,15 +28,15 @@ export class WelllogComponent implements AfterViewInit {
   }
   private initPlot() {
     const widget = this.createWidget();
-    this.plot = new geotoolkit.plot.Plot({
+    this.plot = new Plot({
       'canvasElement': this.canvas.nativeElement,
       'root': widget,
       'autoUpdate': true
     });
     this.widget = widget;
   }
-  private createWidget(): geotoolkit.welllog.widgets.WellLogWidget {
-    const widget = new geotoolkit.welllog.widgets.WellLogWidget({
+  private createWidget(): WellLogWidget {
+    const widget = new WellLogWidget({
       'horizontalscrollable': false,
       'verticalscrollable': true,
       'trackcontainer': {
