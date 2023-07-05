@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { Plot } from '@int/geotoolkit/plot/Plot';
 import { WellLogWidget } from '@int/geotoolkit/welllog/widgets/WellLogWidget';
 @Component({
@@ -29,14 +29,14 @@ export class WelllogComponent implements AfterViewInit {
   private initPlot() {
     const widget = this.createWidget();
     this.plot = new Plot({
-      'canvasElement': this.canvas.nativeElement,
+      'canvaselement': this.canvas.nativeElement,
       'root': widget,
-      'autoUpdate': true
+      'autoupdate': true
     });
     this.widget = widget;
   }
   private createWidget(): WellLogWidget {
-    const widget = new WellLogWidget({
+    return new WellLogWidget({
       'horizontalscrollable': false,
       'verticalscrollable': true,
       'trackcontainer': {
@@ -44,9 +44,8 @@ export class WelllogComponent implements AfterViewInit {
       },
       'border': { 'visible': false }
     });
-    return widget;
   }
-  private resize(event) {
+  private resize(_event) {
     if (this.plot) {
       this.plot.setSize(this.parent.nativeElement.clientWidth, this.parent.nativeElement.clientHeight);
     }
