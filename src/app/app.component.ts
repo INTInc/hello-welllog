@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit {
         'indexunit': 'ft'
     });
   }
-  private createCurve(dataSource, color) : LogCurve {
+  private createCurve(dataSource, color): LogCurve {
     return new LogCurve(dataSource)
         .setLineStyle({
             'color': color,
@@ -45,4 +45,3 @@ export class AppComponent implements AfterViewInit {
         });
   }
 }
-
