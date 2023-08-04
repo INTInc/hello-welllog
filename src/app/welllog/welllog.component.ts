@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Plot } from '@int/geotoolkit/plot/Plot';
 import { WellLogWidget } from '@int/geotoolkit/welllog/widgets/WellLogWidget';
 @Component({
@@ -6,9 +6,8 @@ import { WellLogWidget } from '@int/geotoolkit/welllog/widgets/WellLogWidget';
   templateUrl: './welllog.component.html',
   styleUrls: ['./welllog.component.scss']
 })
-export class WelllogComponent implements AfterViewInit {
+export class WelllogComponent implements AfterViewInit, OnDestroy {
   @ViewChild('wellog', { static: true }) canvas: ElementRef;
-  @ViewChild('parent', { static: true }) parent: ElementRef;
   private plot: Plot;
   private widget: WellLogWidget;
   constructor() { }
@@ -16,21 +15,14 @@ export class WelllogComponent implements AfterViewInit {
     return this.widget;
   }
   ngAfterViewInit() {
-    this.init();
-  }
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.resize(event);
-  }
-  private init() {
     this.initPlot();
-    this.resize(null);
   }
   private initPlot() {
     const widget = this.createWidget();
     this.plot = new Plot({
       'canvaselement': this.canvas.nativeElement,
       'root': widget,
+      'autosize': true,
       'autoupdate': true
     });
     this.widget = widget;
@@ -45,9 +37,7 @@ export class WelllogComponent implements AfterViewInit {
       'border': { 'visible': false }
     });
   }
-  private resize(_event) {
-    if (this.plot) {
-      this.plot.setSize(this.parent.nativeElement.clientWidth, this.parent.nativeElement.clientHeight);
-    }
+  ngOnDestroy(): void {
+    this.plot.dispose();
   }
 }
